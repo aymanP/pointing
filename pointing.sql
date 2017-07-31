@@ -20,98 +20,185 @@ drop table if exists USERS;
 
 drop table if exists WEEK;
 
-/*==============================================================*/
-/* Table: CITY                                                  */
-/*==============================================================*/
-create table CITY
-(
-   ID_CITY              numeric(8,2) not null,
-   CITYLABEL            char(50),
-   primary key (ID_CITY)
-);
+CREATE TABLE `store` (
+  `ID_STORE` decimal(8,0) NOT NULL,
+  `STORELABEL` char(50) DEFAULT NULL,
+  `adress` varchar(100) DEFAULT NULL,
+  `phone` varchar(50) DEFAULT NULL,
+  `channel` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*==============================================================*/
-/* Table: Visit                                              */
-/*==============================================================*/
-create table Visit
-(
-   VISITID              numeric(50,0) not null,
-   VISITDATE            date,
-   DURATION             time,
-   VISITETIME           time,
-   primary key (VISITID)
-);
+--
+-- Index pour les tables exportées
+--
 
-/*==============================================================*/
-/* Table: LOCATION                                              */
-/*==============================================================*/
-create table LOCATION
-(
-   LOCATIONID           numeric(8,0) not null,
-   ID_ZONE              numeric(8,0),
-   ID_STORE             numeric(8,0),
-   ID_CITY              numeric(8,2),
-   primary key (LOCATIONID)
-);
+--
+-- Index pour la table `store`
+--
+ALTER TABLE `store`
+  ADD PRIMARY KEY (`ID_STORE`);
 
-/*==============================================================*/
-/* Table: PRODUCT                                               */
-/*==============================================================*/
-create table PRODUCT
-(
-   REF                  national varchar(50) not null,
-   PRODPRICE            numeric(8,0),
-   PRODLABEL            char(50),
-   primary key (REF)
-);
+  
+CREATE TABLE `storedata` (
+  `ID` int(11) NOT NULL,
+  `ID_WEEK` int(11) DEFAULT NULL,
+  `REF` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `ID_STORE` int(11) DEFAULT NULL,
+  `VISITID` int(11) DEFAULT NULL,
+  `USERID` int(11) DEFAULT NULL,
+  `SELLOUT_BtoB` int(11) DEFAULT NULL,
+  `SELLOUT_BtoC` int(11) DEFAULT NULL,
+  `STOCK_BtoC` int(11) DEFAULT NULL,
+  `STOCK_BtoB` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*==============================================================*/
-/* Table: STORE                                                 */
-/*==============================================================*/
-create table STORE
-(
-   ID_STORE             numeric(8,0) not null,
-   STORELABEL           char(50),
-   primary key (ID_STORE)
-);
+--
+-- Index pour les tables exportées
+--
 
-/*==============================================================*/
-/* Table: STOREDATA                                             */
-/*==============================================================*/
-create table STOREDATA
-(
-   ID                   numeric(8,0) not null,
-   ID_WEEK              numeric(8,0),
-   REF                  national varchar(50),
-   ID_STORE             numeric(8,0),
-   VISITID              numeric(50,0),
-   USERID               numeric(8,0),
-   SELLOUT              numeric(8,0),
-   STOCK                numeric(8,0),
-   primary key (ID)
-);
+--
+-- Index pour la table `storedata`
+--
+ALTER TABLE `storedata`
+  ADD PRIMARY KEY (`ID`);
 
-/*==============================================================*/
-/* Table: USERS                                                 */
-/*==============================================================*/
-create table USERS
-(
-   USERID               numeric(8,0) not null,
-   TYPE                 char(50),
-   primary key (USERID)
-);
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
 
-/*==============================================================*/
-/* Table: WEEK                                                  */
-/*==============================================================*/
-create table WEEK
-(
-   ID_WEEK              numeric(8,0) not null,
-   STARTDATE            date,
-   ENDDATE              date,
-   WEEKLABEL            char(50),
-   primary key (ID_WEEK)
-);
+--
+-- AUTO_INCREMENT pour la table `storedata`
+--
+ALTER TABLE `storedata`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+  
+CREATE TABLE `week` (
+  `ID_WEEK` decimal(8,0) NOT NULL,
+  `STARTDATE` date DEFAULT NULL,
+  `ENDDATE` date DEFAULT NULL,
+  `WEEKLABEL` char(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `week`
+--
+ALTER TABLE `week`
+  ADD PRIMARY KEY (`ID_WEEK`);
+
+  
+CREATE TABLE `users` (
+  `USERID` decimal(8,0) NOT NULL,
+  `TYPE` char(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`USERID`);
+
+  
+CREATE TABLE `visit` (
+  `VISITID` decimal(50,0) NOT NULL,
+  `VISITDATE` date DEFAULT NULL,
+  `DURATION` time DEFAULT NULL,
+  `VISITETIME` time DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `visit`
+--
+ALTER TABLE `visit`
+  ADD PRIMARY KEY (`VISITID`);
+
+  
+CREATE TABLE `channel` (
+  `id` int(11) NOT NULL,
+  `code` varchar(50) DEFAULT NULL,
+  `label` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `channel`
+--
+
+INSERT INTO `channel` (`id`, `code`, `label`) VALUES
+(1, 'IAM', 'MAROC TELECOM'),
+(2, 'ORANGE', ' ORANGE TELECOM'),
+(3, 'INWI', 'INWI'),
+(4, 'SM', 'Souk Market');
+
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `channel`
+--
+ALTER TABLE `channel`
+  ADD PRIMARY KEY (`id`);
+
+  
+CREATE TABLE `city` (
+  `ID_CITY` decimal(8,2) NOT NULL,
+  `CITYLABEL` char(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `city`
+--
+ALTER TABLE `city`
+  ADD PRIMARY KEY (`ID_CITY`);
+
+CREATE TABLE `location` (
+  `LOCATIONID` decimal(8,0) NOT NULL,
+  `ID_ZONE` decimal(8,0) DEFAULT NULL,
+  `ID_STORE` decimal(8,0) DEFAULT NULL,
+  `ID_CITY` decimal(8,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `location`
+--
+ALTER TABLE `location`
+  ADD PRIMARY KEY (`LOCATIONID`);
+  
+CREATE TABLE `product` (
+  `REF` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `PRODPRICE` decimal(8,0) DEFAULT NULL,
+  `PRODLABEL` char(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`REF`);
 
 alter table LOCATION add constraint FK_RELATIONSHIP_8 foreign key (ID_CITY)
       references CITY (ID_CITY) on delete restrict on update restrict;
