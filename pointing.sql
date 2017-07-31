@@ -221,3 +221,5 @@ alter table STOREDATA add constraint FK_RELATIONSHIP_5 foreign key (VISITID)
 alter table STOREDATA add constraint FK_RELATIONSHIP_6 foreign key (ID_WEEK)
       references WEEK (ID_WEEK) on delete restrict on update restrict;
 
+alter table STORE add constraint FK_RELATIONSHIP_7 foreign key (channel)
+      references Channel (ID) on delete restrict on update restrict;
