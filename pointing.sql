@@ -21,7 +21,7 @@ drop table if exists USERS;
 drop table if exists WEEK;
 
 CREATE TABLE `store` (
-  `ID_STORE` decimal(8,0) NOT NULL,
+  `ID_STORE` int(11) NOT NULL,
   `STORELABEL` char(50) DEFAULT NULL,
   `adress` varchar(100) DEFAULT NULL,
   `phone` varchar(50) DEFAULT NULL,
@@ -74,7 +74,7 @@ ALTER TABLE `storedata`
 
   
 CREATE TABLE `week` (
-  `ID_WEEK` decimal(8,0) NOT NULL,
+  `ID_WEEK` int(11) NOT NULL,
   `STARTDATE` date DEFAULT NULL,
   `ENDDATE` date DEFAULT NULL,
   `WEEKLABEL` char(50) DEFAULT NULL
@@ -92,7 +92,7 @@ ALTER TABLE `week`
 
   
 CREATE TABLE `users` (
-  `USERID` decimal(8,0) NOT NULL,
+  `USERID` int(11) NOT NULL,
   `TYPE` char(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -168,9 +168,9 @@ ALTER TABLE `city`
   ADD PRIMARY KEY (`ID_CITY`);
 
 CREATE TABLE `location` (
-  `LOCATIONID` decimal(8,0) NOT NULL,
-  `ID_ZONE` decimal(8,0) DEFAULT NULL,
-  `ID_STORE` decimal(8,0) DEFAULT NULL,
+  `LOCATIONID` int(11) NOT NULL,
+  `ID_ZONE` int(11) DEFAULT NULL,
+  `ID_STORE` int(11) DEFAULT NULL,
   `ID_CITY` decimal(8,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -186,7 +186,7 @@ ALTER TABLE `location`
   
 CREATE TABLE `product` (
   `REF` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `PRODPRICE` decimal(8,0) DEFAULT NULL,
+  `PRODPRICE` int(11) DEFAULT NULL,
   `PRODLABEL` char(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
